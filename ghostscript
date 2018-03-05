@@ -1,0 +1,1 @@
+gs -sDEVICE=pdfwrite -sProcessColorModel=DeviceGray  -sColorConversionStrategy=Gray  -dOverrideICC  -o all_bw.pdf  -f all.pdf
