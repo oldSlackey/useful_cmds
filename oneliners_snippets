@@ -1,0 +1,30 @@
+## Mount network drive with authentication
+sudo sshfs user@remote.server.address:/ /mnt/ -o allow_other,IdentityFile=~/.ssh/id_rsa
+
+## Discussion and code here for displaying 'adjusted' curves, along with very strongly worded
+## warnings that it is not valid for Cox PH
+
+http://stats.stackexchange.com/questions/210622/how-to-plot-adjusted-kaplan-meier-curves
+
+## The code for that page is:
+library("survival")
+require("survival")
+
+days <- rpois(100, 3)
+status <- rbinom(100,1,0.34)
+group <- sample(c(1,2,3,4), 100, replace=TRUE)
+df <- data.frame(days, status)
+
+#overall survival
+surv <- survfit(Surv(days, status)~1)
+summary(surv)
+plot(surv)
+
+#survival by group
+kmsurv <- survfit(Surv(days,status) ~ strata(group), df)
+plot(kmsurv)
+
+#survival adjusted to group effect
+cox <- coxph(Surv(days,status)~group, df)
+summary(cox)
+plot(survfit(cox))
