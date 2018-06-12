@@ -42,3 +42,31 @@ git checkout mybranch
 ## or for short
 git checkout -b mybranch
 ## (does both at once)
+
+# returns string w/o leading whitespace
+trim.leading <- function (x)  sub("^\\s+", "", x)
+
+# returns string w/o trailing whitespace
+trim.trailing <- function (x) sub("\\s+$", "", x)
+
+# returns string w/o leading or trailing whitespace
+trim <- function (x) gsub("^\\s+|\\s+$", "", x)
+
+## Ghost script pdf editing
+
+gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=output.pdf pdffile1.pdf pdffile2.pdf
+
+## which combines pdffile1.pdf and pdffile2.pdf into a single ouput.pdf.
+
+
+## Delete certain pages of a PDF document:
+
+gs -sDEVICE=pdfwrite -dNOPAUSE -dQUIET -dBATCH -dFirstPage=m -dLastPage=n -sOutputFile=output.pdf input.pdf
+
+## where m and n are positive integers (page numbers), i.e. the above command only prints out pages starting from page number m through n of input.pdf into output.pdf.
+
+## find columns with nas anywhere
+unlist(lapply(df, function(x) any(is.na(x))))
+
+## Fix permissions on data files
+find -type f -exec chmod a-wx {} \; && find -type d -exec chmod a-w {} \;
