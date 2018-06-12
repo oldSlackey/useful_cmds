@@ -70,3 +70,29 @@ unlist(lapply(df, function(x) any(is.na(x))))
 
 ## Fix permissions on data files
 find -type f -exec chmod a-wx {} \; && find -type d -exec chmod a-w {} \;
+
+## Files that are in both Dir1 and Dir2:
+
+find "$Dir1/" "$Dir2/" -printf '%P\n' | sort | uniq -d
+
+## Files that are in Dir1 but not in Dir2:
+
+find "$Dir1/" "$Dir2/" "$Dir2/" -printf '%P\n' | sort | uniq -u
+find "fgez_dmc/src/" "WP1/src/" "WP1/src/" -printf '%P\n' | sort | uniq -u
+
+
+## Files that are in both Dir1 and Dir2:
+find "fgez_dmc/" "WP1/" -printf '%P\n' | sort | uniq -d
+
+
+## Files that are in Dir2 but not in Dir1:
+
+find "$Dir1/" "$Dir1/" "$Dir2/" -printf '%P\n' | sort | uniq -u
+
+
+## If you want to know what's common to two directories then this is another way with much less coding.
+
+#!/bin/bash
+
+comm -12 <(ls -F $1) <(ls -F $2)
+
