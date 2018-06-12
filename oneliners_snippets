@@ -28,3 +28,17 @@ plot(kmsurv)
 cox <- coxph(Surv(days,status)~group, df)
 summary(cox)
 plot(survfit(cox))
+
+## Renaming part of filename
+rename 's/ABC/XYZ/' *.dat
+
+## Some git commands
+git branch mybranch
+## (creates it)
+
+git checkout mybranch
+## (checks it out)
+
+## or for short
+git checkout -b mybranch
+## (does both at once)
