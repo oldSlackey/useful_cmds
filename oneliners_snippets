@@ -96,3 +96,6 @@ find "$Dir1/" "$Dir1/" "$Dir2/" -printf '%P\n' | sort | uniq -u
 
 comm -12 <(ls -F $1) <(ls -F $2)
 
+## Regex-gsub part of a filename where 'WP1' is the pattern to be replaced with the 'WP2' pattern
+for i in *WP1*; do mv -n "$i" "${i/WP1/WP2}"; done
+
